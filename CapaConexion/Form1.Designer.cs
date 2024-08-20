@@ -60,13 +60,13 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(25, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 20);
+            this.label1.Size = new System.Drawing.Size(229, 20);
             this.label1.TabIndex = 2;
-            this.label1.Text = "label1";
+            this.label1.Text = "Filtrar por nombre de compañia";
             // 
             // tbFiltro
             // 
-            this.tbFiltro.Location = new System.Drawing.Point(83, 29);
+            this.tbFiltro.Location = new System.Drawing.Point(260, 26);
             this.tbFiltro.Name = "tbFiltro";
             this.tbFiltro.Size = new System.Drawing.Size(184, 26);
             this.tbFiltro.TabIndex = 3;

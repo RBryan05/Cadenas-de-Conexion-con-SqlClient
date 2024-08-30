@@ -44,5 +44,25 @@ namespace CapaConexion
             CapaDatos.DataBase.ApplicationName = "Programacion 2 ejemplo";
             CapaDatos.DataBase.ConnetionTimeout = 30;
         }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var consulta = customerRepository.ObtenerPorId(txtBuscar.Text);
+                if (consulta != null)
+                {
+                    txtCompanyName.Text = consulta.CompanyName;
+                }
+                else
+                {
+                    MessageBox.Show("No se encontraron registros con este id");
+                }
+            }
+            catch 
+            {
+                MessageBox.Show("Ocurrio un error.");
+            }
+        }
     }
 }

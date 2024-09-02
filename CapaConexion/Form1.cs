@@ -73,19 +73,11 @@ namespace CapaConexion
 
         private void btnInsertar_Click(object sender, EventArgs e)
         {
-            var nuevoCliente = new Customers
-            {
-                CompanyName = txtCompanyName.Text,
-                CustomerID = txtCustomersID.Text,
-                ContactName = txtContactName.Text,
-                ContactTitle = txtContactTitle.Text,
-                Address = txtAddress.Text,
-                City = txtCity.Text,
-            };
+            var nuevoCliente = ObtenerNuevoCliente();
 
             var resultado = 0;
 
-            if (ValidarCampoNull(nuevoCliente) == false)
+            if (ValidarCampoNull() == false)
             {
                 resultado = customerRepository.InsertarCliente(nuevoCliente);
                 MessageBox.Show($"Cliente insertado con exito {resultado}");
@@ -97,8 +89,9 @@ namespace CapaConexion
             
         }
 
-        private Boolean ValidarCampoNull(Object objeto)
+        private Boolean ValidarCampoNull()
         {
+            var objeto = ObtenerNuevoCliente();
             foreach (PropertyInfo property in objeto.GetType().GetProperties())
             {
                 object value = property.GetValue(objeto, null);
@@ -109,6 +102,36 @@ namespace CapaConexion
                 }
             }
             return false;
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            var editarCliente = ObtenerNuevoCliente();
+
+            if (ValidarCampoNull() == false)
+            {
+                var resultado = customerRepository.ModificarCliente(editarCliente);
+                MessageBox.Show("Cliente modificado.");
+            }
+            else
+            {
+                MessageBox.Show("Debe completar todos los campos por favor.");
+            }
+        }
+
+        private Customers ObtenerNuevoCliente()
+        {
+            var enuevoCliente = new Customers
+            {
+                CompanyName = txtCompanyName.Text,
+                CustomerID = txtCustomersID.Text,
+                ContactName = txtContactName.Text,
+                ContactTitle = txtContactTitle.Text,
+                Address = txtAddress.Text,
+                City = txtCity.Text,
+            };
+
+            return enuevoCliente;
         }
     }
 }

@@ -153,5 +153,39 @@ namespace CapaDatos
                 }
             }   
         }
+
+        public int ModificarCliente(Customers cliente)
+        {
+            using(var conexion = DataBase.GetSqlConnection())
+            {
+                String update = "";
+                update = update + "UPDATE [dbo].[Customers] " + "\n";
+                update = update + "   SET [CustomerID] = @CustomerID " + "\n";
+                update = update + "      ,[CompanyName] = @CompanyName " + "\n";
+                update = update + "      ,[ContactName] = @ContactName " + "\n";
+                update = update + "      ,[ContactTitle] = @ContactTitle " + "\n";
+                update = update + "      ,[Address] = @Address " + "\n";
+                update = update + "      ,[City] = @City " + "\n";
+                update = update + " WHERE [CustomerID] = @CustomerID";
+
+                using (var comando = new SqlCommand(update, conexion))
+                {
+                    int insertados = parametrosCliente(cliente, comando);
+                    return insertados;
+                };
+            }
+        }
+
+        private int parametrosCliente(Customers cliente, SqlCommand comando)
+        {
+            comando.Parameters.AddWithValue("CustomerID", cliente.CustomerID);
+            comando.Parameters.AddWithValue("CompanyName", cliente.CompanyName);
+            comando.Parameters.AddWithValue("ContactName", cliente.ContactName);
+            comando.Parameters.AddWithValue("ContactTitle", cliente.ContactTitle);
+            comando.Parameters.AddWithValue("Address", cliente.Address);
+            comando.Parameters.AddWithValue("City", cliente.City);
+            var insertados = comando.ExecuteNonQuery();
+            return insertados;
+        }
     }
 }

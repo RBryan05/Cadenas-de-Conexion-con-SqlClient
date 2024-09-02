@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using CapaModelos;
@@ -117,6 +118,40 @@ namespace CapaDatos
             List<Customers> Customers = new List<Customers>();
             var filtrar = Clientes.FindAll(x => x.CompanyName.StartsWith(nombre));
             return filtrar;
+        }
+
+        public int InsertarCliente(Customers cliente)
+        {
+            using(var conexion = DataBase.GetSqlConnection())
+            {
+                String insertInto = "";
+                insertInto = insertInto + "INSERT INTO [dbo].[Customers] " + "\n";
+                insertInto = insertInto + "           ([CustomerID] " + "\n";
+                insertInto = insertInto + "           ,[CompanyName] " + "\n";
+                insertInto = insertInto + "           ,[ContactName] " + "\n";
+                insertInto = insertInto + "           ,[ContactTitle] " + "\n";
+                insertInto = insertInto + "           ,[Address] " + "\n";
+                insertInto = insertInto + "           ,[City]) " + "\n";
+                insertInto = insertInto + "     VALUES " + "\n";
+                insertInto = insertInto + "           (@CustomerID" + "\n";
+                insertInto = insertInto + "           ,@CompanyName " + "\n";
+                insertInto = insertInto + "           ,@ContactName " + "\n";
+                insertInto = insertInto + "           ,@ContactTitle " + "\n";
+                insertInto = insertInto + "           ,@Address " + "\n";
+                insertInto = insertInto + "           ,@City)" + "\n";
+
+                using(var comando = new SqlCommand(insertInto, conexion))
+                {
+                    comando.Parameters.AddWithValue("CustomerID", cliente.CustomerID);
+                    comando.Parameters.AddWithValue("CompanyName", cliente.CompanyName);
+                    comando.Parameters.AddWithValue("ContactName", cliente.ContactName);
+                    comando.Parameters.AddWithValue("ContactTitle", cliente.ContactTitle);
+                    comando.Parameters.AddWithValue("Address", cliente.Address);
+                    comando.Parameters.AddWithValue("City", cliente.City);
+                    var insertados = comando.ExecuteNonQuery();
+                    return insertados;
+                }
+            }   
         }
     }
 }

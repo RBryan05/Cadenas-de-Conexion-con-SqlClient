@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using CapaModelos;
 using CapaDatos;
+using System.Reflection;
 
 namespace CapaConexion
 {
@@ -53,6 +54,11 @@ namespace CapaConexion
                 if (consulta != null)
                 {
                     txtCompanyName.Text = consulta.CompanyName;
+                    txtAddress.Text = consulta.Address;
+                    txtCity.Text = consulta.City;
+                    txtContactName.Text = consulta.ContactName;
+                    txtCustomersID.Text = consulta.CustomerID;
+                    txtContactTitle.Text = consulta.ContactTitle;
                 }
                 else
                 {
@@ -63,6 +69,46 @@ namespace CapaConexion
             {
                 MessageBox.Show("Ocurrio un error.");
             }
+        }
+
+        private void btnInsertar_Click(object sender, EventArgs e)
+        {
+            var nuevoCliente = new Customers
+            {
+                CompanyName = txtCompanyName.Text,
+                CustomerID = txtCustomersID.Text,
+                ContactName = txtContactName.Text,
+                ContactTitle = txtContactTitle.Text,
+                Address = txtAddress.Text,
+                City = txtCity.Text,
+            };
+
+            var resultado = 0;
+
+            if (ValidarCampoNull(nuevoCliente) == false)
+            {
+                resultado = customerRepository.InsertarCliente(nuevoCliente);
+                MessageBox.Show($"Cliente insertado con exito {resultado}");
+            }
+            else
+            {
+                MessageBox.Show("Debe completar todos los campos por favor.");
+            }
+            
+        }
+
+        private Boolean ValidarCampoNull(Object objeto)
+        {
+            foreach (PropertyInfo property in objeto.GetType().GetProperties())
+            {
+                object value = property.GetValue(objeto, null);
+
+                if (value == "")
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -133,5 +133,12 @@ namespace CapaConexion
 
             return enuevoCliente;
         }
+
+        private void btneliminar_Click(object sender, EventArgs e)
+        {
+            string id = txtCustomersID.Text;
+            int eliminados = customerRepository.EliminarCliente(id);
+            MessageBox.Show("Filas afectadas: " + eliminados);
+        }
     }
 }

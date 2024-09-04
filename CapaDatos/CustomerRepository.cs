@@ -114,9 +114,8 @@ namespace CapaDatos
 
         public List<Customers> Filtrar(string nombre)
         {
-            ObtenerTodo();
-            List<Customers> Customers = new List<Customers>();
-            var filtrar = Clientes.FindAll(x => x.CompanyName.StartsWith(nombre));
+            var datos = ObtenerTodo();
+            var filtrar = datos.FindAll(x => x.CompanyName.StartsWith(nombre));
             return filtrar;
         }
 
@@ -186,6 +185,23 @@ namespace CapaDatos
             comando.Parameters.AddWithValue("City", cliente.City);
             var insertados = comando.ExecuteNonQuery();
             return insertados;
+        }
+
+        public int EliminarCliente(string id)
+        {
+            using(var conexion = DataBase.GetSqlConnection())
+            {
+                String delete = "";
+                delete = delete + "DELETE FROM [dbo].[Customers] " + "\n";
+                delete = delete + "  WHERE [CustomerID] = @id" + "\n";
+
+                using(var comando = new SqlCommand(delete, conexion))
+                {
+                    comando.Parameters.AddWithValue("@id", id);
+                    int resultado = comando.ExecuteNonQuery();
+                    return resultado;
+                }
+            }  
         }
     }
 }

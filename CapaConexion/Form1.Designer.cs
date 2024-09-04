@@ -49,6 +49,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btnInsertar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.btneliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -213,9 +214,9 @@
             // 
             // btnInsertar
             // 
-            this.btnInsertar.Location = new System.Drawing.Point(1017, 398);
+            this.btnInsertar.Location = new System.Drawing.Point(1017, 394);
             this.btnInsertar.Name = "btnInsertar";
-            this.btnInsertar.Size = new System.Drawing.Size(308, 31);
+            this.btnInsertar.Size = new System.Drawing.Size(132, 31);
             this.btnInsertar.TabIndex = 17;
             this.btnInsertar.Text = "Insertar";
             this.btnInsertar.UseVisualStyleBackColor = true;
@@ -223,19 +224,30 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(1017, 440);
+            this.btnModificar.Location = new System.Drawing.Point(1193, 394);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(308, 31);
+            this.btnModificar.Size = new System.Drawing.Size(132, 31);
             this.btnModificar.TabIndex = 20;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
+            // btneliminar
+            // 
+            this.btneliminar.Location = new System.Drawing.Point(1017, 435);
+            this.btneliminar.Name = "btneliminar";
+            this.btneliminar.Size = new System.Drawing.Size(308, 31);
+            this.btneliminar.TabIndex = 21;
+            this.btneliminar.Text = "Eliminar Cliente";
+            this.btneliminar.UseVisualStyleBackColor = true;
+            this.btneliminar.Click += new System.EventHandler(this.btneliminar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1337, 581);
+            this.ClientSize = new System.Drawing.Size(1337, 563);
+            this.Controls.Add(this.btneliminar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.txtContactName);
             this.Controls.Add(this.label8);
@@ -289,6 +301,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnInsertar;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.Button btneliminar;
     }
 }
 
